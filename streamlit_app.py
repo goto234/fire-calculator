@@ -282,15 +282,15 @@ chart_html = f"""
 <img src="data:image/png;base64,{fig_to_base64(fig3)}" class="portrait">
 """
 
-# 2) button to generate & download
-if st.button("📄 Generate PDF Report"):
-    html = html_report(inputs_html, stats_html, chart_html)
-    pdf_path = html_to_pdf(html)
-    with open(pdf_path, "rb") as f:
-        st.download_button(
-            label="📥 Download Report",
-            data=f.read(),
-            file_name="FIRE_Report.pdf",
-            mime="application/pdf"
-        )
-    shutil.rmtree(os.path.dirname(pdf_path), ignore_errors=True)
+# if st.button("📄 Generate PDF Report"):
+#     html = html_report(inputs_html, stats_html, charts_html)
+#     pdf_path = html_to_pdf(html)
+#     with open(pdf_path, "rb") as f:
+#         st.download_button(
+#             label="📥 Download Report",
+#             data=f.read(),
+#             file_name="FIRE_Report.pdf",
+#             mime="application/pdf"
+#         )
+#     shutil.rmtree(os.path.dirname(pdf_path), ignore_errors=True)
+
