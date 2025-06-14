@@ -60,11 +60,11 @@ def html_report(inputs_html: str, stats_html: str, chart_html: str) -> str:
 </p>
 </body></html>"""
 
-def html_to_pdf(html: str) -> str:
-    """Write HTML to a temp-file PDF via WeasyPrint, return its path."""
-    with tempfile.NamedTemporaryFile(delete=False, suffix=".pdf") as f:
-        HTML(string=html).write_pdf(f.name)
-        return f.name
+#def html_to_pdf(html: str) -> str:
+#    """Write HTML to a temp-file PDF via WeasyPrint, return its path."""
+#    with tempfile.NamedTemporaryFile(delete=False, suffix=".pdf") as f:
+#        HTML(string=html).write_pdf(f.name)
+#        return f.name
 
 
 # ------------------------ Page Setup ------------------------
@@ -294,3 +294,38 @@ chart_html = f"""
 #         )
 #     shutil.rmtree(os.path.dirname(pdf_path), ignore_errors=True)
 
+
+# HTML Report because PDF d/l was not working on Streamlit Community and hence commented
+
+st.caption("💡 To convert the HTML report to PDF, open it in a browser and use `Ctrl+P` → 'Save as PDF'.")
+charts_html = f"""
+<h2>Charts & Explanations</h2>
+<h3>1. Monte Carlo Corpus Paths</h3>
+<p>Each line shows a potential financial journey. Early crashes = high risk.</p>
+<img src="data:image/png;base64,{fig_to_base64(fig1)}" class="landscape">
+
+<h3>2. Burn Curve (Percentiles)</h3>
+<p>Red = worst case (P10), Blue = median (P50), Green = optimistic (P90)</p>
+<img src="data:image/png;base64,{fig_to_base64(fig2)}" class="landscape">
+
+<h3>3. Histogram of Final Corpus</h3>
+<p>Left bar = number of people whose corpus hit zero by the end</p>
+<img src="data:image/png;base64,{fig_to_base64(fig3)}" class="portrait">
+"""
+
+if st.button("📄 Generate HTML Report"):
+    html = html_report(inputs_html, stats_html, charts_html)
+
+    # Encode HTML as bytes in memory (no tempfile)
+    html_bytes = html.encode("utf-8")
+
+    st.download_button(
+        label="📥 Download HTML Report",
+        data=html_bytes,
+        file_name="FIRE_Report.html",
+        mime="text/html"
+    )
+
+
+
+    #shutil.rmtree(os.path.dirname(html_path), ignore_errors=True)
