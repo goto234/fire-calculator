@@ -1,0 +1,8 @@
+streamlit
+numpy
+pandas
+matplotlib
+yfinance
+python-dotenv
+requests
+weasyprint
