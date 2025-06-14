@@ -9,7 +9,7 @@ from datetime import datetime
 import numpy as np
 import streamlit as st
 import matplotlib.pyplot as plt
-from weasyprint import HTML
+#from weasyprint import HTML
 
 from fire_engine import simulate_fire
 from data_fetcher import load_market_data
