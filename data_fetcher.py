@@ -258,7 +258,7 @@ def _generate_fallback_data(return_window: int) -> pd.DataFrame:
     dates = pd.date_range(
         end=pd.Timestamp.now().replace(day=1) - pd.DateOffset(days=1),
         periods=return_window * 12,
-        freq="M"
+        freq="ME"
     )
     
     np.random.seed(42)  # Reproducible
